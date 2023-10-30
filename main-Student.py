@@ -6,6 +6,7 @@ from menu_definitions import menu_main
 from menu_definitions import add_menu
 from menu_definitions import delete_menu
 from menu_definitions import list_menu
+import json
 
 
 def add_department(db):
@@ -39,13 +40,21 @@ def add_department(db):
             print("Please re-enter the department details.")
             continue
         except pymongo.errors.WriteError as e:
-            print("Error:", e.details['errmsg'])
+            error_json = json.loads(json.dumps(e.details))
+            error_info = error_json["errInfo"]
+            property_name = error_info["details"]["schemaRulesNotSatisfied"][0]["propertiesNotSatisfied"][0]["propertyName"]
+            if property_name == "building":
+                print("Error: the building should be one of these: 'ANAC', 'CDC', 'DC', 'ECS', 'EN2', 'EN3', 'EN4', 'EN5', 'ET', 'HSCI', 'NUR', 'VEC'")
+            else:
+                print(property_name, "does not satisfy the length requirements")
             print("Please re-enter the department details.")
             continue
         except Exception as e:
             print("Error:", e)
             print("Please re-enter the department details.")
             continue
+
+
 
         #collection = db["departments"]
 
