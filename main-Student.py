@@ -228,12 +228,10 @@ def list_student(db):
 
 if __name__ == '__main__':
     # password: str = getpass.getpass('Mongo DB password -->')
-    password = ""
-    username: str = input('Database username [CECS-323-Spring-2023-user] -->') or \
-                    ""
-    project: str = input('Mongo project name [cecs-323-spring-2023] -->') or \
-                   " 0"
-    hash_name: str = input('7-character database hash [puxnikb] -->') or ""
+    password = "Carm3n1ta"
+    username: str = input('Database username [CECS-323-Spring-2023-user] -->') or "rboixo"
+    project: str = input('Mongo project name [cecs-323-spring-2023] -->') or "atlascluster"
+    hash_name: str = input('7-character database hash [puxnikb] -->') or "wxir5tb"
     cluster = f"mongodb+srv://{username}:{password}@{project}.{hash_name}.mongodb.net/?retryWrites=true&w=majority&authSource=admin" #&authSource=admin
     print(f"Cluster: mongodb+srv://{username}:********@{project}.{hash_name}.mongodb.net/?retryWrites=true&w=majority&authSource=admin") #&authSource=admin
     client = MongoClient(cluster)
@@ -303,7 +301,7 @@ if __name__ == '__main__':
                 },
                 "description": {
                     "bsonType": "string",
-                    "minLength": 1,
+                    "minLength": 10,
                     "maxLength": 80,
                     "description": "Description of the department."
                 }
